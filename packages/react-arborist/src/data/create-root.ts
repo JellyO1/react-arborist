@@ -19,6 +19,7 @@ export function createRoot<T>(tree: TreeApi<T>): NodeApi<T> {
       id,
       children: null,
       isDraggable: tree.isDraggable(data),
+      isSelectable: tree.isSelectable(data),
       rowIndex: null,
     });
     const children = tree.accessChildren(data);

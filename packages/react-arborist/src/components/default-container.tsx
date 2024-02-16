@@ -42,7 +42,7 @@ export function DefaultContainer() {
         if (tree.isEditing) {
           return;
         }
-        if (e.key === "Backspace") {
+        if (e.key === "Delete") {
           if (!tree.props.onDelete) return;
           const ids = Array.from(tree.selectedIds);
           if (ids.length > 1) {
@@ -160,7 +160,7 @@ export function DefaultContainer() {
           tree.focus(tree.lastNode);
           return;
         }
-        if (e.key === "Enter") {
+        if (e.key === "F2") {
           const node = tree.focusedNode;
           if (!node) return;
           if (!node.isEditable || !tree.props.onRename) return;
@@ -172,13 +172,9 @@ export function DefaultContainer() {
         if (e.key === " ") {
           e.preventDefault();
           const node = tree.focusedNode;
-          if (!node) return;
-          if (node.isLeaf) {
-            node.select();
-            node.activate();
-          } else {
-            node.toggle();
-          }
+          if (!node || node.isSelectable === false) return;
+          node.select();
+          node.activate();
           return;
         }
         if (e.key === "*") {

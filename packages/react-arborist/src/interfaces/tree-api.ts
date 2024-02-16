@@ -601,6 +601,11 @@ export class TreeApi<T> {
     return !utils.access(data, check) ?? true;
   }
 
+  isSelectable(data: T) {
+    const check = this.props.disableSelection || (() => false);
+    return !utils.access(data, check) ?? true;
+  }
+
   isDragging(node: string | IdObj | null) {
     const id = identifyNull(node);
     if (!id) return false;

@@ -10,6 +10,7 @@ type Params<T> = {
   children: NodeApi<T>[] | null;
   parent: NodeApi<T> | null;
   isDraggable: boolean;
+  isSelectable: boolean;
   rowIndex: number | null;
   tree: TreeApi<T>;
 };
@@ -22,6 +23,7 @@ export class NodeApi<T = any> {
   children: NodeApi<T>[] | null;
   parent: NodeApi<T> | null;
   isDraggable: boolean;
+  isSelectable: boolean;
   rowIndex: number | null;
 
   constructor(params: Params<T>) {
@@ -32,6 +34,7 @@ export class NodeApi<T = any> {
     this.children = params.children;
     this.parent = params.parent;
     this.isDraggable = params.isDraggable;
+    this.isSelectable = params.isSelectable;
     this.rowIndex = params.rowIndex;
   }
 
@@ -197,6 +200,8 @@ export class NodeApi<T = any> {
   }
 
   handleClick = (e: React.MouseEvent) => {
+    if(this.isSelectable === false) return;
+
     if (e.metaKey && !this.tree.props.disableMultiSelection) {
       this.isSelected ? this.deselect() : this.selectMulti();
     } else if (e.shiftKey && !this.tree.props.disableMultiSelection) {

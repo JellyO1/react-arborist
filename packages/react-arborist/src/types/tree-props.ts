@@ -51,6 +51,7 @@ export interface TreeProps<T> {
         dragNodes: NodeApi<T>[];
         index: number;
       }) => boolean);
+  disableSelection?: string | boolean | BoolFunc<T>;
 
   /* Event Handlers */
   onActivate?: (node: NodeApi<T>) => void;
